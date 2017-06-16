@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, hashHistory} from 'react-router';
+import { Router, Route, IndexRoute} from 'react-router';
 
 import App from '../containers';
 
@@ -16,7 +16,7 @@ import Item6 from '../components/Item6';
 class RouteMap extends React.Component{
   render() {
     return (
-      <Router history={hashHistory}>
+      <Router history={this.props.history}>
         <Route path="/" component={App}>
           <IndexRoute component={ListIndex} />
           <Route path="/item1" component={Item1} />
