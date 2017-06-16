@@ -16,13 +16,13 @@ module.exports = {
           presets: ['react', 'es2015'],
           plugins: [
             'react-html-attrs',
-            ["import", { libraryName: "antd", style: "css" }]
+            ["import", { libraryName: "antd", style: "less" }]
           ]
         }
       },
       {
-        test: /\.css/,
-        loader: 'style-loader!css-loader'
+        test: /\.less/,
+        loader: 'style-loader!css-loader!less-loader'
       }
     ]
   },
@@ -35,9 +35,7 @@ module.exports = {
     historyApiFallback: true,
     hot: true
   },
-  plugins: debug ? [] : [
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
   ],
 }

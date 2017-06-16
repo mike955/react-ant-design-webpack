@@ -10,6 +10,7 @@ import {
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
+import 'antd/dist/antd.less';
 //import 'antd/dist/antd.css';  // or 'antd/dist/antd.less'
 export default class Header extends React.Component{
   render() {
