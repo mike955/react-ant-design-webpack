@@ -4,7 +4,7 @@ var path = require('path');
 
 module.exports = {
   context: path.join(__dirname),
-  devtool: debug ? "inline-sourcemap": null,
+  devtool: "source-map",
   entry: './src/root.js',
   module: {
     loaders:[
@@ -14,7 +14,10 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['react', 'es2015'],
-          plugins: ['react-html-attrs']
+          plugins: [
+            'react-html-attrs',
+            ["import", { libraryName: "antd", style: "css" }]
+          ]
         }
       },
       {
@@ -26,6 +29,11 @@ module.exports = {
   output: {
     path: __dirname,
     filename: './src/bundle.js'
+  },
+  devServer: {
+    compress: true,
+    historyApiFallback: true,
+    hot: true
   },
   plugins: debug ? [] : [
     new webpack.optimize.DedupePlugin(),

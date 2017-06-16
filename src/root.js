@@ -1,18 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { hashHistory } from 'react-router';
 
+import RouteMap from './routes/routeMap';
 
-export default class Root extends React.Component{
-  render() {
-    return(
-      <div>
-        Hello Reacts!
-      </div>
-    )
-  }
-}
+import Header from './components/Header/index';
 
 ReactDOM.render(
-  <Root />,
+  <RouteMap />,
   document.getElementById('root')
 );
