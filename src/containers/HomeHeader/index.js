@@ -8,11 +8,14 @@ import {
   Menu,
   Icon,
   Modal,
-  Button
+  Button,
+  Form,
+  Input,
 } from 'antd';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+const FormItem = Form.Item;
 
 import 'antd/dist/antd.less';
 import './style.less';
@@ -60,7 +63,19 @@ class Header extends React.Component{
   }
 
   handleOkRegister() {
-    console.log(this.props)
+    let options = {
+      'method': 'GET',
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'mode': 'cors',
+      'Access-Control-Allow-Origin': '*',
+    }
+    fetch('http://127.0.0.1:3000?user=123', options)
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
+    })
+
     const userinfo = {
       modal1visible: false,
       userinfo: 456
@@ -82,7 +97,18 @@ class Header extends React.Component{
     this.props.actions.logout(userinfo);
   }
 
+
   render() {
+    const formItemLayout = {
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 5 },
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 12 },
+      },
+    };
 
     const userShow = this.props.userinfo.userinfo
     ? <Col span={4}>
@@ -111,7 +137,7 @@ class Header extends React.Component{
         </Row>
         <Modal
           visible={this.props.userinfo.modal1visible}
-          title="Title"
+          title="注册"
           onOk={this.handleOkRegister.bind(this)}
           onCancel={this.handleCancelRegister.bind(this)}
           footer={[
@@ -123,9 +149,22 @@ class Header extends React.Component{
               >注册
             </Button>,
           ]}>
-          <p>some contents1...</p>
-          <p>some contents1...</p>
-          <p>some contents1...</p>
+          <FormItem
+            {...formItemLayout}
+            label="用户名"
+            validateStatus="error"
+            help="用户名不能为空"
+          >
+            <Input placeholder="请输入用户名" id="error" />
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="密码"
+            validateStatus="error"
+            help="密码不能为空"
+          >
+            <Input placeholder="请输入用密码" id="error" />
+          </FormItem>
         </Modal>
         <Modal visible={this.props.userinfo.modal2visible}
           title="Title"
